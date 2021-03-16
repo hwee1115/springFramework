@@ -1,0 +1,13 @@
+*{
+	font-size:medium;
+	margin:0px;
+	padding:0px;
+}
+
+div{
+	background-color:yellow;
+}
+
+.class1{
+	border:1px solid black;
+}
