@@ -2,19 +2,28 @@ package com.mycompany.webapp.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	private int bno;
 	private String btitle;
 	private String bcontent;
 	private String bwriter;
 	private Date bdate;
+	private MultipartFile battach;
 	private int bhitcount;
-	private String battachonmae;
-	private String battachsavename;
+	private String battachoname;
+	private String battachsname;
 	private String battachtype;
 	
 	public int getBno() {
 		return bno;
+	}
+	public MultipartFile getBattach() {
+		return battach;
+	}
+	public void setBattach(MultipartFile battach) {
+		this.battach = battach;
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
@@ -49,17 +58,17 @@ public class Board {
 	public void setBhitcount(int bhitcount) {
 		this.bhitcount = bhitcount;
 	}
-	public String getBattachonmae() {
-		return battachonmae;
+	public String getBattachoname() {
+		return battachoname;
 	}
-	public void setBattachonmae(String battachonmae) {
-		this.battachonmae = battachonmae;
+	public void setBattachoname(String battachonmae) {
+		this.battachoname = battachonmae;
 	}
 	public String getBattachsname() {
-		return battachsavename;
+		return battachsname;
 	}
 	public void setBattachsname(String battachsname) {
-		this.battachsavename = battachsname;
+		this.battachsname = battachsname;
 	}
 	public String getBattachtype() {
 		return battachtype;

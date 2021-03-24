@@ -5,7 +5,7 @@
                 <%-- 메뉴 내용 부분 --%>
 <div>
 	<c:if test="${connStatus == '성공' }">
-		<div class="alert alert-success">
+		<div class="alert alert-primary">
 		DB연결 성공
 		</div>
 	</c:if>
@@ -15,7 +15,9 @@
 		</div>
 	</c:if>
 	
-	<p>1.<a href="boards">게시물 목록</a></p>
+	<p>1.<a href="list">게시물 목록</a></p>
+	<p>2.<a href="createForm">게시물 입력</a></p>
+	<p>3.<a href="createFormWithAttach">게시물 입력(첨부 포함)</a></p>
 </div>
              
 <%@ include file="/WEB-INF/views/common/footer.jsp" %> 
