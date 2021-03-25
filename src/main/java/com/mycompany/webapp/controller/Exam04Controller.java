@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -62,11 +63,23 @@ public class Exam04Controller {
 		model.addAttribute("list", list);
 		return "exam04/boardlist";
 	}*/
-
+	
 	@GetMapping("/list")
-	public String getBoardList(@RequestParam(defaultValue="1") int pageNo,Model model) {
+	public String getBoardList(String pageNo,Model model, HttpSession session) {
+		int intPageNo = 1;
+		//세션에서 pager를 찾고, 있으면 pageNo설정
+		if(pageNo == null) {
+			Pager pager = (Pager)session.getAttribute("pager");
+			if(pager!=null) {
+				intPageNo = pager.getPageNo();
+			}
+		}else {
+			intPageNo = Integer.parseInt(pageNo);
+		}
+		
 		int totalRows = boardsService.getTotalRows();
-		Pager pager = new Pager(10,5,totalRows,pageNo);
+		Pager pager = new Pager(10,5,totalRows,intPageNo);
+		session.setAttribute("pager", pager);
 		List<Board> list = boardsService.getBoardList(pager);
 		model.addAttribute("list", list);
 		model.addAttribute("pager",pager);
@@ -74,10 +87,14 @@ public class Exam04Controller {
 	}
 
 	@GetMapping("/createForm")
-	public String createForm() {
-		return "exam04/createForm";
+	public String createForm(HttpSession session) {
+		String uid =(String) session.getAttribute("loginUid");
+		if(uid == null) {
+			return "redirect:/exam07/loginForm";
+		}else {
+			return "exam04/createFormWithAttach";
+		}
 	}
-
 
 
 	/*   @PostMapping("/create")
@@ -130,8 +147,14 @@ public class Exam04Controller {
 	}
 
 	@GetMapping("/createFormWithAttach")
-	public String createFormWithAttach() {
-		return "exam04/createFormWithAttach";
+	public String createFormWithAttach(HttpSession session) {
+		String uid =(String) session.getAttribute("loginUid");
+		if(uid == null) {
+			return "redirect:/exam07/loginForm";
+		}else {
+			return "exam04/createFormWithAttach";
+		}
+		
 	}
 
 	/* public String createWithAttach(

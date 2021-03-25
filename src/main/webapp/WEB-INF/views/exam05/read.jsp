@@ -46,8 +46,10 @@
         </div>
         
         <div>
-        	<button class="btn btn-primary btn-sm" onclick="getList(1)">목록</button>
-        	<button class="btn btn-primary btn-sm" onclick="updateForm(${board.bno})">수정</button>
-        	<button class="btn btn-danger btn-sm" onclick="deleteBoard(${board.bno})">삭제</button>
+        	<button class="btn btn-primary btn-sm" onclick="getList()">목록</button>
+		    <c:if test="${loginUid == board.bwriter }">
+		      <a class="btn btn-danger btn-sm" href="updateForm?bno=${board.bno}">수정(U)</a>
+		      <a class="btn btn-danger btn-sm" href="delete?bno=${board.bno}">삭제(D)</a>   
+		      </c:if>
         </div>
 </div>
